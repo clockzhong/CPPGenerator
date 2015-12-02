@@ -4,8 +4,19 @@ SRC_PATH=./src
 INC_PATH=./inc
 TESTS_PATH=./tests
 #We define the Env variables in this section
-export GOOGLETEST_ROOT_PATH=$(SourcesRoot)/GoogleTest
+#export GOOGLETEST_ROOT_PATH=$(SourcesRoot)/GoogleTest
 export SQLITE_ROOT_PATH=$(SourcesRoot)/SQLite
+
+##define the Libsocket library paths:
+export LIBSOCKET_ROOT_PATH=$(SourcesRoot)/Libsocket
+#export LIBSOCKET_LIB_PATHS=$(LIBSOCKET_ROOT_PATH)/C:$(LIBSOCKET_ROOT_PATH)/C++
+export LIBSOCKET_LIB_PATHS=$(LIBSOCKET_ROOT_PATH)/C++
+export LIBSOCKET_HEADER_PATH=$(LIBSOCKET_ROOT_PATH)/headers
+
+#dfine your own EasyLogging++ path
+#export EASYLOGGINGPP_HEADER_PATH=$(SourcesRoot)/EasyLogging++/src
+
+
 
 CPPFLAGS += -I$(INC_PATH)
 
@@ -92,13 +103,6 @@ $(TESTS_PATH)/first_test.o: $(TESTS_PATH)/first_test.d
 $(TESTS_PATH)/first_test : $(TESTS_PATH)/first_test.o gtest_main.a
 	$(CXX) $(CPPFLAGS)  $^ -o $@
 
-##define the Libsocket library paths:
-export LIBSOCKET_ROOT_PATH=$(SourcesRoot)/Libsocket
-#export LIBSOCKET_LIB_PATHS=$(LIBSOCKET_ROOT_PATH)/C:$(LIBSOCKET_ROOT_PATH)/C++
-export LIBSOCKET_LIB_PATHS=$(LIBSOCKET_ROOT_PATH)/C++
-export LIBSOCKET_HEADER_PATH=$(LIBSOCKET_ROOT_PATH)/headers
-
-export EASYLOGGINGPP_HEADER_PATH=$(SourcesRoot)/EasyLogging++/src
 
 srv: ./server.cpp
 	$(CXX) -o $@ server.cpp $(CPPFLAGS) 
